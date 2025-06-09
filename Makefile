@@ -153,7 +153,7 @@ ui/dist/app/index.html: $(shell find ui/src -type f && find ui -maxdepth 1 -type
 	JOBS=max yarn --cwd ui build
 
 $(GOPATH)/bin/staticfiles:
-	cd `mktemp -d` && go get bou.ke/staticfiles
+	cd `mktemp -d` && GOBIN=/go/bin go install bou.ke/staticfiles@latest
 
 ifeq ($(STATIC_FILES),true)
 server/static/files.go: $(GOPATH)/bin/staticfiles ui/dist/app/index.html
@@ -433,7 +433,7 @@ pull-images:
 	docker pull python:alpine3.6
 
 $(GOPATH)/bin/goreman:
-	cd `mktemp -d` && go get github.com/mattn/goreman
+	cd `mktemp -d` && GOBIN=/go/bin go install github.com/mattn/goreman@latest
 
 .PHONY: start
 ifeq ($(RUN_MODE),local)
