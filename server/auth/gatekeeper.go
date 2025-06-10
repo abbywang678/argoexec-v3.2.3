@@ -8,8 +8,8 @@ import (
 	"strconv"
 
 	"github.com/antonmedv/expr"
-	eventsource "github.com/argoproj/argo-events/pkg/client/eventsource/clientset/versioned"
-	sensor "github.com/argoproj/argo-events/pkg/client/sensor/clientset/versioned"
+	eventsource "github.com/argoproj/argo-events/pkg/client/clientset/versioned"
+	sensor "github.com/argoproj/argo-events/pkg/client/clientset/versioned"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
