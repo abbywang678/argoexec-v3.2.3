@@ -14,7 +14,14 @@ import (
 
 // RunServer starts a metrics server
 func (m *Metrics) RunServer(ctx context.Context) {
-	defer runtimeutil.HandleCrash(runtimeutil.PanicHandlers...)
+	handlers := make([]func(interface{}), len(runtimeutil.PanicHandlers))
+	for i, h := range runtimeutil.PanicHandlers {
+		h2 := h
+		handlers[i] = func(obj interface{}) {
+			h2(context.TODO(), obj)
+		}
+	}
+	defer runtimeutil.HandleCrash(handlers...)
 
 	if !m.metricsConfig.Enabled {
 		// If metrics aren't enabled, return

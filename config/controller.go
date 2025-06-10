@@ -75,7 +75,15 @@ func (cc *controller) parseConfigMap(cm *apiv1.ConfigMap) (interface{}, error) {
 }
 
 func (cc *controller) Run(stopCh <-chan struct{}, onChange func(config interface{}) error) {
-	defer runtimeutil.HandleCrash(runtimeutil.PanicHandlers...)
+
+	handlers := make([]func(interface{}), len(runtimeutil.PanicHandlers))
+	for i, h := range runtimeutil.PanicHandlers {
+		h2 := h
+		handlers[i] = func(obj interface{}) {
+			h2(context.TODO(), obj)
+		}
+	}
+	defer runtimeutil.HandleCrash(handlers...)
 
 	restClient := cc.kubeclientset.CoreV1().RESTClient()
 	resource := "configmaps"
