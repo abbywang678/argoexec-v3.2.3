@@ -35,7 +35,15 @@ type AgentExecutor struct {
 }
 
 func (ae *AgentExecutor) Agent(ctx context.Context) error {
-	defer runtimeutil.HandleCrash(runtimeutil.PanicHandlers...)
+
+	handlers := make([]func(interface{}), len(runtimeutil.PanicHandlers))
+	for i, h := range runtimeutil.PanicHandlers {
+		h2 := h
+		handlers[i] = func(obj interface{}) {
+			h2(context.TODO(), obj)
+		}
+	}
+	defer runtimeutil.HandleCrash(handlers...)
 
 	taskSetInterface := ae.WorkflowInterface.ArgoprojV1alpha1().WorkflowTaskSets(ae.Namespace)
 	for {
