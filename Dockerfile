@@ -3,7 +3,7 @@
 ARG DOCKER_CHANNEL=stable
 ARG DOCKER_VERSION=18.09.1
 # NOTE: kubectl version should be one minor version less than https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ARG KUBECTL_VERSION=1.19.6
+ARG KUBECTL_VERSION=1.31.0
 ARG JQ_VERSION=1.6
 
 FROM docker.io/library/golang:1.24 as builder
@@ -39,7 +39,7 @@ COPY . .
 
 ####################################################################################################
 
-FROM alpine:3 as argoexec-base
+FROM alpine:3.22 as argoexec-base
 
 ARG DOCKER_CHANNEL
 ARG DOCKER_VERSION

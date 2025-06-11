@@ -19,6 +19,7 @@ require (
 	github.com/evanphx/json-patch v5.6.0+incompatible
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/go-git/go-git/v5 v5.14.0
+	github.com/go-jose/go-jose/v3 v3.0.4
 	github.com/go-openapi/jsonreference v0.21.0
 	github.com/go-openapi/spec v0.21.0
 	github.com/go-python/gpython v0.0.3
@@ -60,7 +61,6 @@ require (
 	google.golang.org/grpc v1.71.1
 	gopkg.in/go-playground/webhooks.v5 v5.15.0
 	gopkg.in/jcmturner/gokrb5.v5 v5.3.0
-	gopkg.in/square/go-jose.v2 v2.5.1
 	k8s.io/api v0.32.2
 	k8s.io/apimachinery v0.32.2
 	k8s.io/client-go v0.32.2
